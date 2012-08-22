@@ -6,7 +6,11 @@
 
 using namespace std;
 
-PlaceDescriptionService::PlaceDescriptionService(Http* http) : http_(http) {}
+// START:ctor
+PlaceDescriptionService::PlaceDescriptionService(Http* http) 
+   : http_(http) {
+}
+// END:ctor
 
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
