@@ -26,8 +26,8 @@ class HttpStub: public Http {
 };
 // END:HttpStub
 
-// START:ReturnsSummaryDescriptionForValidLocation
-TEST_F(APlaceDescriptionService, ReturnsCityDescriptionForValidLocation) {
+// START:ReturnsDescriptionForValidLocation
+TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    HttpStub httpStub;
    PlaceDescriptionService service(&httpStub);
 
