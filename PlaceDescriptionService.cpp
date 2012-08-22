@@ -12,6 +12,7 @@ PlaceDescriptionService::PlaceDescriptionService(Http* http)
 }
 // END:ctor
 
+// START:summaryDescription
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
    string jsonResponse = http_->get(createGetRequestUrl(latitude, longitude));
@@ -21,6 +22,7 @@ string PlaceDescriptionService::summaryDescription(
 
    return summaryDescription(address);
 }
+// END:summaryDescription
 
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
