@@ -18,42 +18,42 @@ public:
 const string APlaceDescriptionService::ValidLatitude("38.005");
 const string APlaceDescriptionService::ValidLongitude("-104.44");
 
-// START:returnURL
+// START:expectationURL
 class HttpStub: public Http {
-// START_HIGHLIGHT
 public:
    string returnResponse;
+// START_HIGHLIGHT
+   string expectedURL;
 // END_HIGHLIGHT
+
    string get(const string& url) const {
       verify(url);
-// START_HIGHLIGHT
       return returnResponse;
-// END_HIGHLIGHT
    }
 
    void verify(const string& url) const {
-      // ...
-// END:returnURL
-      string urlStart(
-         "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&");
-      string expected(urlStart + 
-            "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
-            "lon=" + APlaceDescriptionService::ValidLongitude);
-      ASSERT_THAT(url, Eq(expected));
-// START:returnURL
+// START_HIGHLIGHT
+      ASSERT_THAT(url, Eq(expectedURL));
+// END_HIGHLIGHT
    }
 };
 
-// START:ReturnsDescriptionForValidLocation
 TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    HttpStub httpStub;
-// START_HIGHLIGHT
-   httpStub.returnResponse =
+   httpStub.returnResponse = // ...
+// END:expectationURL
       stringutil::ticToQuote("{ 'address': {\
               'road':'Drury Ln',\
               'city':'Fountain',\
               'state':'CO',\
               'country':'US' }}");
+// START:expectationURL
+// START_HIGHLIGHT
+   string urlStart(
+      "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&");
+   httpStub.expectedURL = urlStart + 
+         "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
+         "lon=" + APlaceDescriptionService::ValidLongitude;
 // END_HIGHLIGHT
 
    PlaceDescriptionService service(&httpStub);
@@ -62,6 +62,5 @@ TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
 
    ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
 }
-// END:ReturnsCityDescriptionForValidLocation
-// END:returnURL
+// END:expectationURL
 
