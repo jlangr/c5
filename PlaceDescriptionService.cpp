@@ -24,10 +24,12 @@ string PlaceDescriptionService::summaryDescription(
 }
 // END:summaryDescription
 
+// START:createGetRequestUrl
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
-   return "http://example.com/request/TODO";
+   return "";
 }
+// END:createGetRequestUrl
 
 string PlaceDescriptionService::summaryDescription(const Address& address) const {
    return address.road + ", " + address.city + ", " + 
