@@ -22,6 +22,11 @@ string PlaceDescriptionService::summaryDescription(
 
    return summaryDescription(address);
 }
+
+string PlaceDescriptionService::summaryDescription(const Address& address) const {
+   return address.road + ", " + address.city + ", " + 
+          address.state + ", " + address.country;
+}
 // END:summaryDescription
 
 // START:createGetRequestUrl
@@ -30,9 +35,4 @@ string PlaceDescriptionService::createGetRequestUrl(
    return "";
 }
 // END:createGetRequestUrl
-
-string PlaceDescriptionService::summaryDescription(const Address& address) const {
-   return address.road + ", " + address.city + ", " + 
-          address.state + ", " + address.country;
-}
 
