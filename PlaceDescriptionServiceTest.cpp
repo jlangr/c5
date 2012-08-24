@@ -20,12 +20,22 @@ const string APlaceDescriptionService::ValidLongitude("-104.44");
 
 // START:HttpStub
 class HttpStub: public Http {
-   std::string get(const std::string& url) const {
+   string get(const string& url) const {
+// START_HIGHLIGHT
+      verify(url);
+// END_HIGHLIGHT
       return stringutil::ticToQuote("{ 'address': {\
               'road':'Drury Ln',\
               'city':'Fountain',\
               'state':'CO',\
               'country':'US' }}");
+   }
+
+   void verify(const string& url) const {
+      string expectedArgs(
+            "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
+            "lon=" + APlaceDescriptionService::ValidLongitude);
+      ASSERT_THAT(url, EndsWith(expectedArgs));
    }
 };
 // END:HttpStub
