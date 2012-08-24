@@ -32,10 +32,14 @@ string PlaceDescriptionService::summaryDescription(const Address& address) const
 // START:createGetRequestUrl
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
-   return 
-      keyValue("lat", latitude) + "&" +
-      keyValue("lon", longitude);
+   string server = "http://open.mapquestapi.com/";
+   string document = "nominatim/v1/reverse";
+   return server + document + "?" + 
+      keyValue("format", "json") + "&" + 
+      keyValue("lat", latitude) + "&" + 
+      keyValue("lon", longitude); 
 }
+// START:createGetRequestUrl
 
 string PlaceDescriptionService::keyValue(
       const string& key, const string& value) const {
