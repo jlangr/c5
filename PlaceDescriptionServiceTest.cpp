@@ -22,12 +22,12 @@ const string APlaceDescriptionService::ValidLongitude("-104.44");
 class HttpStub: public Http {
 // START_HIGHLIGHT
 public:
-   string returnURL;
+   string returnResponse;
 // END_HIGHLIGHT
    string get(const string& url) const {
       verify(url);
 // START_HIGHLIGHT
-      return returnURL;
+      return returnResponse;
 // END_HIGHLIGHT
    }
 
@@ -48,7 +48,7 @@ public:
 TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    HttpStub httpStub;
 // START_HIGHLIGHT
-   httpStub.returnURL =
+   httpStub.returnResponse =
       stringutil::ticToQuote("{ 'address': {\
               'road':'Drury Ln',\
               'city':'Fountain',\
