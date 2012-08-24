@@ -37,7 +37,8 @@ string PlaceDescriptionService::createGetRequestUrl(
       keyValue("lon", longitude);
 }
 
-string PlaceDescriptionService::keyValue(const string& key, const string& value) const {
+string PlaceDescriptionService::keyValue(
+      const string& key, const string& value) const {
    return key + "=" + value;
 }
 // END:createGetRequestUrl
