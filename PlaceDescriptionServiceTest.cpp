@@ -18,20 +18,21 @@ public:
 const string APlaceDescriptionService::ValidLatitude("38.005");
 const string APlaceDescriptionService::ValidLongitude("-104.44");
 
-// START:HttpStub
+// START:returnURL
 class HttpStub: public Http {
-   string get(const string& url) const {
 // START_HIGHLIGHT
-      verify(url);
+public:
+   string returnURL;
 // END_HIGHLIGHT
-      return stringutil::ticToQuote("{ 'address': {\
-              'road':'Drury Ln',\
-              'city':'Fountain',\
-              'state':'CO',\
-              'country':'US' }}");
+   string get(const string& url) const {
+      verify(url);
+// START_HIGHLIGHT
+      return returnURL;
+// END_HIGHLIGHT
    }
 
-// START:verify
+   // ...
+// END:returnURL
    void verify(const string& url) const {
       string urlStart(
          "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&");
@@ -40,13 +41,21 @@ class HttpStub: public Http {
             "lon=" + APlaceDescriptionService::ValidLongitude);
       ASSERT_THAT(url, Eq(expected));
    }
-// END:verify
+// START:returnURL
 };
-// END:HttpStub
 
 // START:ReturnsDescriptionForValidLocation
 TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    HttpStub httpStub;
+// START_HIGHLIGHT
+   httpStub.returnURL =
+      stringutil::ticToQuote("{ 'address': {\
+              'road':'Drury Ln',\
+              'city':'Fountain',\
+              'state':'CO',\
+              'country':'US' }}");
+// END_HIGHLIGHT
+
    PlaceDescriptionService service(&httpStub);
 
    string description = service.summaryDescription(ValidLatitude, ValidLongitude);
@@ -54,4 +63,5 @@ TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
 }
 // END:ReturnsCityDescriptionForValidLocation
+// END:returnURL
 
