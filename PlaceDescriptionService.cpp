@@ -32,7 +32,13 @@ string PlaceDescriptionService::summaryDescription(const Address& address) const
 // START:createGetRequestUrl
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
-   return "lat=" + latitude + "&lon=" + longitude;
+   return 
+      keyValue("lat", latitude) + "&" +
+      keyValue("lon", longitude);
+}
+
+string PlaceDescriptionService::keyValue(const string& key, const string& value) const {
+   return key + "=" + value;
 }
 // END:createGetRequestUrl
 
