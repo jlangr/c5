@@ -38,7 +38,6 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
 // START_HIGHLIGHT
    EXPECT_CALL(httpStub, get(expectedURL));
 // END_HIGHLIGHT
-
    PlaceDescriptionService service(&httpStub);
 
    service.summaryDescription(ValidLatitude, ValidLongitude);

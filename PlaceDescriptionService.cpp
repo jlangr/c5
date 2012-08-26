@@ -10,12 +10,13 @@ PlaceDescriptionService::PlaceDescriptionService(Http* http)
    : http_(http) {
 }
 
-// START:emptySummaryDescription
+// START:summaryDescription
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
+   http_->get(createGetRequestUrl(latitude, longitude));
    return "";
 }
-// END:emptySummaryDescription
+// END:summaryDescription
 
 string PlaceDescriptionService::summaryDescription(const Address& address) const {
    return address.road + ", " + address.city + ", " + 
