@@ -6,30 +6,22 @@
 
 using namespace std;
 
-// START:ctor
 PlaceDescriptionService::PlaceDescriptionService(Http* http) 
    : http_(http) {
 }
-// END:ctor
 
-// START:summaryDescription
+// START:emptySummaryDescription
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
-   string jsonResponse = http_->get(createGetRequestUrl(latitude, longitude));
-
-   AddressExtractor extractor;
-   Address address = extractor.addressFrom(jsonResponse);
-
-   return summaryDescription(address);
+   return "";
 }
+// END:emptySummaryDescription
 
 string PlaceDescriptionService::summaryDescription(const Address& address) const {
    return address.road + ", " + address.city + ", " + 
           address.state + ", " + address.country;
 }
-// END:summaryDescription
 
-// START:createGetRequestUrl
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
    string server = "http://open.mapquestapi.com/";
@@ -39,11 +31,9 @@ string PlaceDescriptionService::createGetRequestUrl(
       keyValue("lat", latitude) + "&" + 
       keyValue("lon", longitude); 
 }
-// START:createGetRequestUrl
 
 string PlaceDescriptionService::keyValue(
       const string& key, const string& value) const {
    return key + "=" + value;
 }
-// END:createGetRequestUrl
 
