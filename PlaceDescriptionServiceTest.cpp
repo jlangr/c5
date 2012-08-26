@@ -44,6 +44,7 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
 }
 // END:MakesHttpRequest
 
+// START:FormatsRetrievedAddress
 TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) {
    HttpStub httpStub;
 // START_HIGHLIGHT
@@ -61,4 +62,4 @@ TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) 
 
    ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
 }
-
+// END:FormatsRetrievedAddress
