@@ -45,3 +45,23 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
 }
 // END:MakesHttpRequest
 
+class Updater {
+public:
+// START:SecondExampleIF
+   virtual void add(const string& key, const string& value) { throw 1; }
+// END:SecondExampleIF
+};
+
+class UpdaterMock: public Updater {
+public:
+// START:SecondExampleMock
+   MOCK_METHOD2(add, void(const string&, const string&));
+// END:SecondExampleMock
+};
+
+TEST(Mock, Works) {
+   UpdaterMock updater;
+   EXPECT_CALL(updater, add(_,_));
+   updater.add("", "");
+}
+
