@@ -44,23 +44,21 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
 }
 // END:MakesHttpRequest
 
-class Updater {
-public:
-// START:SecondExampleIF
-   virtual void add(const string& key, const string& value) { throw 1; }
-// END:SecondExampleIF
-};
+TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) {
+   HttpStub httpStub;
+// START_HIGHLIGHT
+   EXPECT_CALL(httpStub, get(_))
+      .WillOnce(Return(
+         stringutil::ticToQuote("{ 'address': {\
+                                   'road':'Drury Ln',\
+                                   'city':'Fountain',\
+                                   'state':'CO',\
+                                   'country':'US' }}")));
+// END_HIGHLIGHT
+   PlaceDescriptionService service(&httpStub);
 
-class UpdaterMock: public Updater {
-public:
-// START:SecondExampleMock
-   MOCK_METHOD2(add, void(const string&, const string&));
-// END:SecondExampleMock
-};
+   string description = service.summaryDescription(ValidLatitude, ValidLongitude);
 
-TEST(Mock, Works) {
-   UpdaterMock updater;
-   EXPECT_CALL(updater, add(_,_));
-   updater.add("", "");
+   ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
 }
 
