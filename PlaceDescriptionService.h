@@ -3,14 +3,19 @@
 
 #include <string>
 #include "Address.h"
-
-class Http;
+#include <curl/curl.h>
+#include <json/reader.h>
+#include <json/value.h>
 
 class PlaceDescriptionService {
 public:
-   PlaceDescriptionService(Http* http);
+   PlaceDescriptionService();
+   ~PlaceDescriptionService() {
+      curl_global_cleanup();
+   }
    std::string summaryDescription(
       const std::string& latitude, const std::string& longitude) const;
+   static size_t writeCallback(const char* buf, size_t size, size_t nMemb, void*);
 
 private:
    std::string createGetRequestUrl(
@@ -18,8 +23,10 @@ private:
    std::string summaryDescription(const Address& address) const;
    std::string keyValue(
       const std::string& key, const std::string& value) const;
+   std::string getString(Json::Value& result, const std::string& name) const;
 
-   Http* http_;
+   CURL* curl;
+   static std::string response_;
 };
 
 #endif

@@ -7,8 +7,6 @@ add_definitions(-std=c++0x)
 
 set(sources 
    main.cpp 
-   HttpTest.cpp
-   Http.cpp
    stringutilTest.cpp
    stringutil.cpp
    AddressExtractorTest.cpp
