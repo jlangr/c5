@@ -37,7 +37,7 @@ string PlaceDescriptionService::summaryDescription(
    reader.parse(response_, location);
    Value jsonAddress = location.get("address", Value::null);
 
-   // populate address
+   // populate address from json
    Address address;
    address.road = jsonAddress.get("road", "").asString();
    address.city = jsonAddress.get("city", "").asString();
