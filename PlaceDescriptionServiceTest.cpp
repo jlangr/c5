@@ -30,6 +30,7 @@ const string APlaceDescriptionService::ValidLongitude("-104.711332");
 TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) {
    string description = service->summaryDescription(ValidLatitude, ValidLongitude);
 
-   ASSERT_THAT(description, Eq("Drury Lane, Fountain, Colorado, United States of America"));
+   ASSERT_THAT(description, Eq(
+      "Drury Lane, Fountain, Colorado, United States of America"));
 }
 
