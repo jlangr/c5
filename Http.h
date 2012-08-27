@@ -2,13 +2,7 @@
 #define Http_h
 
 #include <string>
-
-#include <json/reader.h>
-#include <json/value.h>
-
 #include <curl/curl.h>
-
-using namespace std;
 
 class Http {
 public:
@@ -25,7 +19,7 @@ public:
 private:
    CURL* curl;
 
-   static string response_;
+   static std::string response_;
 };
 
 #endif

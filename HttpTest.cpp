@@ -2,6 +2,7 @@
 #include <string>
 #include "Http.h"
 
+using namespace std;
 using namespace ::testing;
 
 TEST(Http, WriteCallback) {
