@@ -20,7 +20,7 @@ string PlaceDescriptionService::summaryDescription(
 
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
-   return "http://example.com/request/TODO";
+   return "";
 }
 
 string PlaceDescriptionService::summaryDescription(const Address& address) const {
