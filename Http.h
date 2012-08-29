@@ -2,24 +2,13 @@
 #define Http_h
 
 #include <string>
-#include <curl/curl.h>
 
 class Http {
 public:
-   Http();
-   virtual ~Http();
-
 // START:publicInterface
-   virtual std::string get(const std::string& url) const;
+   virtual void initialize() = 0;
+   virtual std::string get(const std::string& url) const = 0;
 // END:publicInterface
-
-   static std::string Response();
-   static size_t writeCallback(const char* buf, size_t size, size_t nMemb, void*);
-
-private:
-   CURL* curl;
-
-   static std::string response_;
 };
 
 #endif
