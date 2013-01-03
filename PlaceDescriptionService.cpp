@@ -26,7 +26,7 @@ string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
    // retrieve JSON response via API
    response_ = "";
-   string url = createGetRequestUrl(latitude, longitude);
+   auto url = createGetRequestUrl(latitude, longitude);
    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
    curl_easy_perform(curl);
    curl_easy_cleanup(curl);
@@ -35,7 +35,7 @@ string PlaceDescriptionService::summaryDescription(
    Value location;
    Reader reader;
    reader.parse(response_, location);
-   Value jsonAddress = location.get("address", Value::null);
+   auto jsonAddress = location.get("address", Value::null);
 
    // populate address from json
    Address address;
