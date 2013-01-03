@@ -24,21 +24,21 @@ MATCHER(IsEmpty, "") {
 }
 
 TEST_F(AnAddressExtractor, ReturnsAnEmptyAddressOnAFailedParse) {
-   Address address = extractor.addressFrom("not valid json");
+   auto address = extractor.addressFrom("not valid json");
 
    ASSERT_THAT(address, IsEmpty());
 }
 
 TEST_F(AnAddressExtractor, ReturnsAnEmptyAddressWhenNoAddressFound) {
-   string json = ticToQuote("{ 'place_id':'15331615' }");
+   auto json = ticToQuote("{ 'place_id':'15331615' }");
 
-   Address address = extractor.addressFrom(json);
+   auto address = extractor.addressFrom(json);
 
    ASSERT_THAT(address, IsEmpty());
 }
 
 TEST_F(AnAddressExtractor, ReturnsPopulatedAddressForValidJsonResult) {
-   string json = ticToQuote("{\
+   auto json = ticToQuote("{\
          'place_id':'15331615',\
          'address':{\
             'road':'War Eagle Court',\
@@ -48,7 +48,7 @@ TEST_F(AnAddressExtractor, ReturnsPopulatedAddressForValidJsonResult) {
          }\
       }");
 
-   Address address = extractor.addressFrom(json);
+   auto address = extractor.addressFrom(json);
 
    ASSERT_THAT(address.road, Eq("War Eagle Court"));
    ASSERT_THAT(address.city, Eq("Colorado Springs"));
@@ -57,13 +57,13 @@ TEST_F(AnAddressExtractor, ReturnsPopulatedAddressForValidJsonResult) {
 }
 
 TEST_F(AnAddressExtractor, DefaultsNonexistentFieldsToEmpty) {
-   string json = ticToQuote("{\
+   auto json = ticToQuote("{\
          'address':{\
             'road':'War Eagle Court',\
             'city':'Colorado Springs',\
             'country':'United States of America' }}");
 
-   Address address = extractor.addressFrom(json);
+   auto address = extractor.addressFrom(json);
 
    ASSERT_THAT(address.state, Eq(""));
 }

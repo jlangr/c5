@@ -12,7 +12,7 @@ Address AddressExtractor::addressFrom(const string& json) const {
 }
 
 Value AddressExtractor::jsonAddressFrom(const string& json) const {
-   Value location = parse(json);
+   auto location = parse(json);
    return location.get("address", Value::null);
 }
 

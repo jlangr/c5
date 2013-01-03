@@ -16,7 +16,7 @@ TEST(Http, WriteCallback) {
 TEST(HttpIntegration, Get) {
    CurlHttp http;
    http.initialize();
-   string response = http.get("http://langrsoft.com");
+   auto response = http.get("http://langrsoft.com");
    ASSERT_THAT(response, HasSubstr("Jeff Langr"));
 }
 

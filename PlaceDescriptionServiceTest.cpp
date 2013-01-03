@@ -32,7 +32,7 @@ TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    HttpStub httpStub;
    PlaceDescriptionService service(&httpStub);
 
-   string description = service.summaryDescription(ValidLatitude, ValidLongitude);
+   auto description = service.summaryDescription(ValidLatitude, ValidLongitude);
 
    ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
 }
