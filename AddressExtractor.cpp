@@ -7,7 +7,8 @@ using namespace Json;
 
 Address AddressExtractor::addressFrom(const string& json) const {
    Address address;
-   populate(address, jsonAddressFrom(json));
+   Value jsonAddress{jsonAddressFrom(json)};
+   populate(address, jsonAddress);
    return address; 
 }
 
@@ -16,8 +17,7 @@ Value AddressExtractor::jsonAddressFrom(const string& json) const {
    return location.get("address", Value::null);
 }
 
-// && rvalue reference thing--sidebar!
-void AddressExtractor::populate(Address& address, Value&& jsonAddress) const {
+void AddressExtractor::populate(Address& address, Value& jsonAddress) const {
    address.road = getString(jsonAddress, "road");
    address.city = getString(jsonAddress, "city");
    address.state = getString(jsonAddress, "state");

@@ -12,8 +12,7 @@ public:
 
 private:
    Json::Value jsonAddressFrom(const std::string& json) const;
-   // && rvalue reference thing--sidebar!
-   void populate(Address& address, Json::Value&& jsonAddress) const;
+   void populate(Address& address, Json::Value& jsonAddress) const;
    Json::Value parse(const std::string& json) const;
    std::string getString(Json::Value& result, const std::string& name) const;
 };
