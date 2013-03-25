@@ -8,7 +8,7 @@ add_definitions(-std=c++0x)
 set(sources 
    main.cpp 
    CurlHttpTest.cpp CurlHttp.cpp
-   stringutilTest.cpp stringutil.cpp
+   stringutilTest.cpp 
    AddressExtractorTest.cpp AddressExtractor.cpp
    PlaceDescriptionServiceTest.cpp PlaceDescriptionService.cpp)
 add_executable(test ${sources})
@@ -18,8 +18,4 @@ target_link_libraries(test gtest)
 target_link_libraries(test rt)
 target_link_libraries(test json_linux-gcc-4.6)
 target_link_libraries(test curl)
-
-# add_custom_command(TARGET run DEPENDS ./test
-#    COMMAND ./test
-# )
 

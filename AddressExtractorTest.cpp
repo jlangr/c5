@@ -2,7 +2,6 @@
 #include "AddressExtractor.h"
 
 #include <algorithm>
-#include <vector>
 #include <string>
 #include "stringutil.h"
 
