@@ -1,4 +1,5 @@
 *.o
 main
 *.swp
+*.swo
 build
