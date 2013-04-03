@@ -4,7 +4,6 @@
 
 #include "PlaceDescriptionService.h"
 #include "Http.h"
-#include "stringutil.h"
 
 using namespace std;
 using namespace testing;
