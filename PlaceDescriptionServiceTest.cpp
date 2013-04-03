@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "PlaceDescriptionService.h"
-#include "stringutil.h"
+//#include "Http.h"
 
 using namespace std;
 using namespace testing;

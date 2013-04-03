@@ -3,11 +3,9 @@
 
 #include <algorithm>
 #include <string>
-#include "stringutil.h"
 
 using namespace std;
 using namespace testing;
-using stringutil::ticToQuote;
 
 class AnAddressExtractor: public Test {
 public:
@@ -29,7 +27,7 @@ TEST_F(AnAddressExtractor, ReturnsAnEmptyAddressOnAFailedParse) {
 }
 
 TEST_F(AnAddressExtractor, ReturnsAnEmptyAddressWhenNoAddressFound) {
-   auto json = ticToQuote("{ 'place_id':'15331615' }");
+   auto json = R"({ "place_id":"15331615" })";
 
    auto address = extractor.addressFrom(json);
 
@@ -37,15 +35,15 @@ TEST_F(AnAddressExtractor, ReturnsAnEmptyAddressWhenNoAddressFound) {
 }
 
 TEST_F(AnAddressExtractor, ReturnsPopulatedAddressForValidJsonResult) {
-   auto json = ticToQuote("{\
-         'place_id':'15331615',\
-         'address':{\
-            'road':'War Eagle Court',\
-            'city':'Colorado Springs',\
-            'state':'Colorado',\
-            'country':'United States of America',\
-         }\
-      }");
+   auto json = R"({
+         "place_id":"15331615",
+         "address":{
+            "road":"War Eagle Court",
+            "city":"Colorado Springs",
+            "state":"Colorado",
+            "country":"United States of America",
+         }
+      })";
 
    auto address = extractor.addressFrom(json);
 
@@ -56,11 +54,11 @@ TEST_F(AnAddressExtractor, ReturnsPopulatedAddressForValidJsonResult) {
 }
 
 TEST_F(AnAddressExtractor, DefaultsNonexistentFieldsToEmpty) {
-   auto json = ticToQuote("{\
-         'address':{\
-            'road':'War Eagle Court',\
-            'city':'Colorado Springs',\
-            'country':'United States of America' }}");
+   auto json = R"({
+         "address":{
+            "road":"War Eagle Court",
+            "city":"Colorado Springs",
+            "country":"United States of America" }})";
 
    auto address = extractor.addressFrom(json);
 

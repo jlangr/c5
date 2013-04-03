@@ -8,7 +8,6 @@ add_definitions(-std=c++0x)
 set(sources 
    main.cpp 
    CurlHttpTest.cpp CurlHttp.cpp
-   stringutilTest.cpp 
    AddressExtractorTest.cpp AddressExtractor.cpp
    PlaceDescriptionServiceTest.cpp PlaceDescriptionService.cpp)
 add_executable(test ${sources})
