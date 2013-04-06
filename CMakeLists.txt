@@ -1,8 +1,8 @@
 project(design)
 cmake_minimum_required(VERSION 2.6)
 
-include_directories(~/gmock-1.6.0/include ~/gmock-1.6.0/gtest/include /usr/include/qt4/QtCore /usr/include/qt4 ~/jsoncpp-src-0.5.0/include ~/curl-7.27.0/include)
-link_directories(~/gmock-1.6.0/mybuild ~/gmock-1.6.0/gtest/mybuild ~/jsoncpp-src-0.5.0/libs/linux-gcc-4.6 ~/curl-7.27.0/build/lib)
+include_directories($ENV{GMOCK_HOME}/include $ENV{GMOCK_HOME}/gtest/include $ENV{JSONCPP_HOME}/include $ENV{CURL_HOME}/include)
+link_directories($ENV{GMOCK_HOME}/mybuild $ENV{GMOCK_HOME}/gtest/mybuild $ENV{JSONCPP_HOME}/libs/linux-gcc-4.6 $ENV{CURL_HOME}/build/lib)
 add_definitions(-std=c++0x)
 
 set(sources 
