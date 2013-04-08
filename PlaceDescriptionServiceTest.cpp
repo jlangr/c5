@@ -19,8 +19,8 @@ const string APlaceDescriptionService::ValidLongitude("-104.44");
 
 // START:HttpStub
 class HttpStub: public Http {
-   void initialize() {}
-   std::string get(const std::string& url) const {
+   void initialize() override {}
+   std::string get(const std::string& url) const override {
       return "???";
    }
 };
