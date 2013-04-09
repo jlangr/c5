@@ -16,7 +16,7 @@ PlaceDescriptionService::PlaceDescriptionService()
 }
 
 size_t PlaceDescriptionService::writeCallback(const char* buf, size_t size, size_t nMemb, void*) {
-   for (int i = 0; i < size * nMemb; i++) 
+   for (auto i = 0u; i < size * nMemb; i++) 
       response_.push_back(buf[i]);
    return size * nMemb;
 }
