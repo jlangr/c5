@@ -31,6 +31,6 @@ TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) 
    auto description = service->summaryDescription(ValidLatitude, ValidLongitude);
 
    ASSERT_THAT(description, Eq(
-      "Drury Lane, Fountain, Colorado, United States of America"));
+      "Drury Lane, Widefield, Colorado, United States of America"));
 }
 

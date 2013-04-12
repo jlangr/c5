@@ -40,7 +40,7 @@ string PlaceDescriptionService::summaryDescription(
    // populate address from json
    Address address;
    address.road = jsonAddress.get("road", "").asString();
-   address.city = jsonAddress.get("city", "").asString();
+   address.city = jsonAddress.get("hamlet", "").asString();
    address.state = jsonAddress.get("state", "").asString();
    address.country = jsonAddress.get("country", "").asString();
 
