@@ -53,7 +53,7 @@ class HttpStub: public Http {
 // START:ReturnsDescriptionForValidLocation
 TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
    HttpStub httpStub;
-   PlaceDescriptionService service(&httpStub);
+   PlaceDescriptionService service{&httpStub};
 
    auto description = service.summaryDescription(ValidLatitude, ValidLongitude);
 
