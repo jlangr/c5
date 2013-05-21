@@ -10,6 +10,13 @@ PlaceDescriptionService::PlaceDescriptionService(Http* http) : http_(http) {}
 
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
-   return "Drury Ln, Fountain, CO, US";
+   auto getRequestUrl = "lat=" + latitude + "&lon=" + longitude; 
+   auto jsonResponse = http_->get(getRequestUrl);
+
+   AddressExtractor extractor;
+   auto address = extractor.addressFrom(jsonResponse);
+   return address.road + ", " + address.city + ", " + 
+          address.state + ", " + address.country;
 }
+
 
