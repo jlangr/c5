@@ -31,12 +31,22 @@ class HttpStub: public Http {
          "country":"US" }})";
    }
 
+// START:verify
    void verify(const string& url) const {
-      auto expectedArgs(
+// START_HIGHLIGHT
+      string urlStart(
+         "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&");
+// END_HIGHLIGHT
+// START_HIGHLIGHT
+      string expected(urlStart + 
+// END_HIGHLIGHT
          "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
          "lon=" + APlaceDescriptionService::ValidLongitude);
-         ASSERT_THAT(url, EndsWith(expectedArgs));
+// START_HIGHLIGHT
+      ASSERT_THAT(url, Eq(expected));
+// END_HIGHLIGHT
    }
+// END:verify
 };
 // END:HttpStub
 
