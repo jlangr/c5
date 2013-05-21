@@ -6,8 +6,11 @@
 
 using namespace std;
 
+// START:ctor
 PlaceDescriptionService::PlaceDescriptionService(Http* http) : http_(http) {}
+// END:ctor
 
+// START:summaryDescription
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
    auto getRequestUrl = "lat=" + latitude + "&lon=" + longitude; 
@@ -18,5 +21,5 @@ string PlaceDescriptionService::summaryDescription(
    return address.road + ", " + address.city + ", " + 
           address.state + ", " + address.country;
 }
-
+// END:summaryDescription
 
