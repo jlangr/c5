@@ -46,7 +46,7 @@ TEST_F(APlaceDescriptionService, ReturnsDescriptionForValidLocation) {
                                     "city":"Fountain",
                                     "state":"CO",
                                     "country":"US" }})";
-// END:expectationURL
+// START:expectationURL
 // START_HIGHLIGHT
    string urlStart{
       "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&"};
