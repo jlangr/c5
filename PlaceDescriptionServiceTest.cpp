@@ -17,15 +17,11 @@ public:
 const string APlaceDescriptionService::ValidLatitude("38.005");
 const string APlaceDescriptionService::ValidLongitude("-104.44");
 
-// START:HttpStub
 class HttpStub: public Http {
 public:
-// START_HIGHLIGHT
    MOCK_METHOD0(initialize, void());
    MOCK_CONST_METHOD1(get, string(const string&));
-// END_HIGHLIGHT
 };
-// END:HttpStub
 
 TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
    HttpStub httpStub;
@@ -34,12 +30,28 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
    auto expectedURL = urlStart + 
       "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
       "lon=" + APlaceDescriptionService::ValidLongitude;
-// START_HIGHLIGHT
    EXPECT_CALL(httpStub, get(expectedURL));
-// END_HIGHLIGHT
    PlaceDescriptionService service{&httpStub};
 
    service.summaryDescription(ValidLatitude, ValidLongitude);
 }
-// END:expectationURL
 
+// START:FormatsRetrievedAddress
+TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) {
+   HttpStub httpStub;
+// START_HIGHLIGHT
+   EXPECT_CALL(httpStub, get(_))
+      .WillOnce(Return(
+         R"({ "address": {
+              "road":"Drury Ln",
+              "city":"Fountain",
+              "state":"CO",
+              "country":"US" }})"));
+// END_HIGHLIGHT
+   PlaceDescriptionService service(&httpStub);
+
+   auto description = service.summaryDescription(ValidLatitude, ValidLongitude);
+
+   ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
+}
+// END:FormatsRetrievedAddress
