@@ -22,15 +22,10 @@ string PlaceDescriptionService::summaryDescription(
    return address.summaryDescription();
 }
 
-// START:get
 string PlaceDescriptionService::get(const string& url) const {
-// START_HIGHLIGHT
-   auto response = http_->get(url);
    http_->initialize();
-   return response;
-// END_HIGHLIGHT
+   return http_->get(url);
 }
-// END:get
 
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
