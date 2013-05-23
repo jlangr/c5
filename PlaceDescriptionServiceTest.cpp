@@ -15,11 +15,11 @@ public:
 
    PlaceDescriptionService* service;
 
-   void SetUp() {
+   void SetUp() override {
       service = new PlaceDescriptionService();
    }
 
-   void TearDown() {
+   void TearDown() override {
       delete service;
    }
 };
