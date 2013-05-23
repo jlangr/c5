@@ -12,7 +12,7 @@ set(sources
    AddressExtractorTest.cpp AddressExtractor.cpp
    HttpFactory.cpp
    OutParameterTest.cpp
-   PlaceDescriptionServiceTest.cpp PlaceDescriptionService.cpp)
+   PlaceDescriptionServiceTest.cpp)
 add_executable(test ${sources})
 target_link_libraries(test pthread)
 target_link_libraries(test gmock)
