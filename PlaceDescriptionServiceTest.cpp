@@ -27,6 +27,7 @@ public:
 };
 // END:HttpStub
 
+// START:MakesHttpRequest
 TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
    HttpStub httpStub;
    string urlStart{
@@ -41,5 +42,5 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
 
    service.summaryDescription(ValidLatitude, ValidLongitude);
 }
-// END:expectationURL
+// END:MakesHttpRequest
 
