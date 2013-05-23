@@ -17,8 +17,15 @@ string PlaceDescriptionService::summaryDescription(
                 keyValue("format", "json") + "&" +
                 keyValue("lat", latitude) + "&" +
                 keyValue("lon", longitude);
-   http_->get(url);
-   return "";
+// START_HIGHLIGHT
+   auto response = http_->get(url);
+// END_HIGHLIGHT
+
+// START_HIGHLIGHT
+   AddressExtractor extractor;
+   auto address = extractor.addressFrom(response);
+   return address.summaryDescription();
+// END_HIGHLIGHT
 }
 // END:summaryDescription
 
