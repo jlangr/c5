@@ -10,6 +10,7 @@ set(sources
    main.cpp 
    CurlHttpTest.cpp CurlHttp.cpp
    AddressExtractorTest.cpp AddressExtractor.cpp
+   OutParameterTest.cpp
    PlaceDescriptionServiceTest.cpp PlaceDescriptionService.cpp)
 add_executable(test ${sources})
 target_link_libraries(test pthread)
