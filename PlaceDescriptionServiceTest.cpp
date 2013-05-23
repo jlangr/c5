@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
 
-#include <vector>
+#include <memory>
 
 #include "PlaceDescriptionService.h"
 //#include "Http.h"
