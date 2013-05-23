@@ -23,6 +23,7 @@ public:
    MOCK_CONST_METHOD1(get, string(const string&));
 };
 
+// START:MakesHttpRequest
 TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
    HttpStub httpStub;
    string urlStart{
@@ -30,16 +31,19 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
    auto expectedURL = urlStart + 
       "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
       "lon=" + APlaceDescriptionService::ValidLongitude;
+// START_HIGHLIGHT
+   EXPECT_CALL(httpStub, initialize());
+// END_HIGHLIGHT
    EXPECT_CALL(httpStub, get(expectedURL));
    PlaceDescriptionService service{&httpStub};
 
    service.summaryDescription(ValidLatitude, ValidLongitude);
 }
+// END:MakesHttpRequest
 
 // START:FormatsRetrievedAddress
 TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) {
    HttpStub httpStub;
-// START_HIGHLIGHT
    EXPECT_CALL(httpStub, get(_))
       .WillOnce(Return(
          R"({ "address": {
@@ -47,7 +51,6 @@ TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) 
               "city":"Fountain",
               "state":"CO",
               "country":"US" }})"));
-// END_HIGHLIGHT
    PlaceDescriptionService service(&httpStub);
 
    auto description = service.summaryDescription(ValidLatitude, ValidLongitude);
