@@ -23,15 +23,16 @@ public:
 
 // START:MakesHttpRequest
 TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
+// START_HIGHLIGHT
+   InSequence forceExpectationOrder;
+// END_HIGHLIGHT
    HttpStub httpStub;
    string urlStart{
       "http://open.mapquestapi.com/nominatim/v1/reverse?format=json&"};
    auto expectedURL = urlStart + 
       "lat=" + APlaceDescriptionService::ValidLatitude + "&" +
       "lon=" + APlaceDescriptionService::ValidLongitude;
-// START_HIGHLIGHT
    EXPECT_CALL(httpStub, initialize());
-// END_HIGHLIGHT
    EXPECT_CALL(httpStub, get(expectedURL));
    PlaceDescriptionService service{&httpStub};
 
@@ -41,13 +42,9 @@ TEST_F(APlaceDescriptionService, MakesHttpRequestToObtainAddress) {
 
 // START:FormatsRetrievedAddress
 TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) {
-// START_HIGHLIGHT
    NiceMock<HttpStub> httpStub;
-// END_HIGHLIGHT
    EXPECT_CALL(httpStub, get(_))
       .WillOnce(Return(
-      // ...
-// END:FormatsRetrievedAddress
          R"({ "address": {
               "road":"Drury Ln",
               "city":"Fountain",
@@ -58,6 +55,5 @@ TEST_F(APlaceDescriptionService, FormatsRetrievedAddressIntoSummaryDescription) 
    auto description = service.summaryDescription(ValidLatitude, ValidLongitude);
 
    ASSERT_THAT(description, Eq("Drury Ln, Fountain, CO, US"));
-// START:FormatsRetrievedAddress
 }
 // END:FormatsRetrievedAddress
