@@ -2,20 +2,15 @@
 #define PlaceDescriptionService_h
 
 #include <string>
-// START:overrideFactoryMethod
 #include <memory>
-// ...
-// END:overrideFactoryMethod
 #include "Address.h"
+#include "HttpFactory.h"
 
 class Http;
 
 class PlaceDescriptionService {
 public:
-// START:overrideFactoryMethod
-   virtual ~PlaceDescriptionService() {}
-// ...
-// END:overrideFactoryMethod
+   PlaceDescriptionService(std::shared_ptr<HttpFactory> factory);
    std::string summaryDescription(
       const std::string& latitude, const std::string& longitude) const;
 
@@ -28,10 +23,7 @@ private:
    std::string get(const std::string& requestUrl) const;
    std::string summaryDescription(const std::string& response) const;
 
-// START:overrideFactoryMethod
-protected:
-   virtual std::shared_ptr<Http> httpService() const;
-// END:overrideFactoryMethod
+   std::shared_ptr<HttpFactory> httpFactory_;
 };
 
 #endif
