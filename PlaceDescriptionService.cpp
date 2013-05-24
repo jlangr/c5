@@ -2,12 +2,16 @@
 #include "Http.h"
 #include "AddressExtractor.h"
 #include "Address.h"
-// START:overrideFactoryMethod
 #include "CurlHttp.h"
-// END:overrideFactoryMethod
 #include <string>
 
 using namespace std;
+
+// START:PlaceDescriptionService
+PlaceDescriptionService::PlaceDescriptionService() 
+   : http_{make_shared<CurlHttp>()} {}
+// ...
+// END:PlaceDescriptionService
 
 string PlaceDescriptionService::summaryDescription(
       const string& latitude, const string& longitude) const {
@@ -23,21 +27,19 @@ string PlaceDescriptionService::summaryDescription(
    return address.summaryDescription();
 }
 
-// START:overrideFactoryMethod
 string PlaceDescriptionService::get(const string& url) const {
-// START_HIGHLIGHT
    auto http = httpService();
    http->initialize();
    return http->get(url);
-// END_HIGHLIGHT
 }
 
-// START_HIGHLIGHT
+// START:PlaceDescriptionService
 shared_ptr<Http> PlaceDescriptionService::httpService() const {
-   return make_shared<CurlHttp>();
-}
+// START_HIGHLIGHT
+   return http_;
 // END_HIGHLIGHT
-// END:overrideFactoryMethod
+}
+// END:PlaceDescriptionService
 
 string PlaceDescriptionService::createGetRequestUrl(
       const string& latitude, const string& longitude) const {
